@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_demo/home_page.dart';
+import 'package:food_demo/screens/home_page.dart';
+import 'package:food_demo/screens/recipe_detail.dart';
 import 'package:food_demo/utilities/recipe_model.dart';
 import 'package:food_demo/utilities/recipes.dart';
 import 'package:food_demo/utilities/theme_data.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
         theme: MyTheme.app_theme,
         title: 'Flutter Demo',
         home: const HomePage(),
+        routes: {
+          RecipeDetail.routeName: (context) => const RecipeDetail(),
+        },
       ),
     );
   }
