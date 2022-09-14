@@ -72,11 +72,14 @@ class FoodItem extends StatelessWidget {
           Positioned(
             right: -2,
             bottom: -15,
-            child: SizedBox(
-              height: 150,
-              width: 150,
-              child: Image.asset(
-                imageUrl!,
+            child: Hero(
+              tag: imageUrl!,
+              child: SizedBox(
+                height: 150,
+                width: 150,
+                child: Image.asset(
+                  imageUrl!,
+                ),
               ),
             ),
           ),
