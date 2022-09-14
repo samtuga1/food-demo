@@ -4,14 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 class MyTheme {
   // ignore: non_constant_identifier_names
   static ThemeData get app_theme => ThemeData(
-        textTheme: GoogleFonts.rubikTextTheme().copyWith(
-          titleLarge: const TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w600,
-          ),
-          bodyMedium: const TextStyle(
-            fontSize: 18,
-          ),
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+              fontSize: 25, fontWeight: FontWeight.bold, fontFamily: 'Gilroy'),
+          bodyMedium: TextStyle(fontSize: 18, fontFamily: 'Gilroy'),
         ),
         // TextTheme(
         //   titleLarge: GoogleFonts.rubik(
