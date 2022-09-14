@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:food_demo/screens/recipe_detail.dart';
 import 'package:food_demo/utilities/food_item.dart';
 import 'package:food_demo/utilities/recipe_model.dart';
 import 'package:provider/provider.dart';
@@ -100,11 +101,15 @@ class _FoodCardState extends State<FoodCard>
         alignment: alignmentAnimation.value,
         child: Transform.scale(
           scale: scaleAnimation.value,
-          child: FoodItem(
-            theme: theme,
-            title: title,
-            subtitle: subtitle,
-            imageUrl: imageUrl,
+          child: GestureDetector(
+            onTap: () =>
+                Navigator.of(context).pushNamed(RecipeDetail.routeName),
+            child: FoodItem(
+              theme: theme,
+              title: title,
+              subtitle: subtitle,
+              imageUrl: imageUrl,
+            ),
           ),
         ),
       ),
