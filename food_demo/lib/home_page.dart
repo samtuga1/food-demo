@@ -1,88 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:food_demo/utilities/food_card.dart';
+import 'package:food_demo/utilities/recipes.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  ValueNotifier<ScrollDirection> scrollDirectionNotifier =
+      ValueNotifier<ScrollDirection>(ScrollDirection.forward);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dessert Recipes'),
       ),
-      body: FoodCard(),
-      // body: ListView.builder(
-      //   itemBuilder: (context, index) => const FoodCard(),
-      // ),
-    );
-  }
-}
-
-class FoodCard extends StatelessWidget {
-  const FoodCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            height: 190,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.yellow,
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  offset: Offset(0, 9),
-                  blurRadius: 8,
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width - 170,
-                    child: Text(
-                      'Lemon Cheesecake',
-                      style: theme.textTheme.titleLarge,
-                      maxLines: 2,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width - 170,
-                    child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-                      style: theme.textTheme.bodyMedium,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  )
-                ],
-              ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 4.0, right: 4.0, top: 3),
+        child: NotificationListener<UserScrollNotification>(
+          onNotification: (notification) {
+            if (notification.direction == ScrollDirection.forward ||
+                notification.direction == ScrollDirection.reverse) {
+              scrollDirectionNotifier.value = notification.direction;
+            }
+            return true;
+          },
+          child: Consumer<Recipes>(
+            builder: (context, recipes, child) => ListView.separated(
+              itemBuilder: (context, index) {
+                return ValueListenableBuilder(
+                  valueListenable: scrollDirectionNotifier,
+                  builder: (context, ScrollDirection scrollDirection, child) {
+                    return ChangeNotifierProvider.value(
+                      value: recipes.recipes[index],
+                      child: FoodCard(
+                        scrollDirection: scrollDirection,
+                      ),
+                    );
+                  },
+                );
+              },
+              separatorBuilder: (context, i) => const SizedBox(height: 15),
+              itemCount: recipes.recipes.length,
             ),
           ),
         ),
-        Positioned(
-          right: -2,
-          bottom: -15,
-          child: SizedBox(
-            height: 150,
-            width: 150,
-            child: Image.asset(
-              'assets/images/04-fluffy-cake.png',
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
