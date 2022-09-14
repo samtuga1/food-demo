@@ -102,8 +102,8 @@ class _FoodCardState extends State<FoodCard>
         child: Transform.scale(
           scale: scaleAnimation.value,
           child: GestureDetector(
-            onTap: () =>
-                Navigator.of(context).pushNamed(RecipeDetail.routeName),
+            onTap: () => Navigator.of(context)
+                .pushNamed(RecipeDetail.routeName, arguments: imageUrl),
             child: FoodItem(
               theme: theme,
               title: title,
