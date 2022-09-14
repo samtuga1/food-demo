@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MyTheme {
   // ignore: non_constant_identifier_names
@@ -18,11 +17,11 @@ class MyTheme {
         //     fontSize: 18,
         //   ),
         // ),
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          titleTextStyle: GoogleFonts.rubik(
+          titleTextStyle: TextStyle(
             fontSize: 20,
             color: Colors.black,
             fontWeight: FontWeight.w600,
