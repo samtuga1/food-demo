@@ -171,6 +171,24 @@ class _RecipeDetailState extends State<RecipeDetail> {
                               end: Offset.zero,
                             ),
                       ).toList(),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.yellow.withOpacity(0.35),
+                              width: 3.59,
+                            ),
+                            borderRadius: BorderRadius.circular(10)),
+                        child:
+                            Column(mainAxisSize: MainAxisSize.min, children: [
+                          Text(
+                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+                            style: theme.textTheme.bodyMedium,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        ]),
+                      )
                     ],
                   ),
                 )
